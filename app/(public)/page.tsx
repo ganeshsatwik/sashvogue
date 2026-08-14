@@ -28,8 +28,8 @@ interface Product {
 }
 
 const CATEGORY_FILTERS = [
-  { key: 'men', label: 'MEN', image: 'https://i.ibb.co/WvVdhkmZ/Untitled-design-4.png' },
-  { key: 'women', label: 'WOMEN', image: 'https://i.ibb.co/Gftdtcwd/Untitled-design-5.png' },
+  { key: 'men', label: 'MEN', image: 'https://i.ibb.co/270gTY6Y/mensection.jpg' },
+  { key: 'women', label: 'WOMEN', image: 'https://i.ibb.co/WvpTj8q7/womensection.jpg' },
   { key: 'accessories', label: 'ACCESSORIES', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&auto=format&fit=crop&q=80' },
 ];
 
@@ -334,7 +334,7 @@ export default function HomePage() {
                 <div className="flex flex-row items-center gap-4 px-4">
                   {/* Image */}
                   <Link href="/new-collection" className="w-1/2 aspect-[4/5] relative overflow-hidden group block">
-                    <img src="https://i.ibb.co/Y6hxn19/Untitled-design-6.png" />
+                    <img src="https://i.ibb.co/Q3Dgp0c5/modelimg.jpg" />
                   </Link>
 
                   {/* Text Content */}
@@ -372,7 +372,7 @@ export default function HomePage() {
 
                 {/* Back Image */}
                 <div className="relative w-[60%] sm:w-[50%] aspect-[3/4] ml-auto">
-                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=600" alt="Collection 1" className="w-full h-full object-cover" />
+                  <img src="https://i.ibb.co/Q3Dgp0c5/modelimg.jpg" alt="Collection 1" className="w-full h-full object-cover" />
                 </div>
 
                 {/* Front Image */}
@@ -446,6 +446,10 @@ export default function HomePage() {
       <ScrollReveal animation="fade-up">
         <section className="relative w-full bg-[#463f3a] overflow-hidden mb-20 sm:mb-28 py-6 sm:py-8 text-center">
 
+          {/* Right Model */}
+          <div className="hidden md:block absolute right-0 bottom-0 h-[90%] sm:h-[110%] opacity-90 pointer-events-none transform translate-x-[5%] sm:-translate-x-10 z-0">
+            <img src="https://i.ibb.co/9CVQKqC/Untitled-design-7-removebg-preview.png" alt="Men Model" className="h-full w-auto object-contain object-bottom" onError={(e) => { e.currentTarget.src = '/bannerimg3.png' }} />
+          </div>
 
           <div className="relative z-10 max-w-2xl mx-auto px-4 flex flex-col items-center">
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/60 mb-2">Limited Offer</p>
@@ -484,7 +488,7 @@ export default function HomePage() {
           <div className="hidden md:grid grid-cols-2 gap-8 items-center bg-gray-50">
             <div className="relative w-full overflow-hidden h-[500px]">
               <img
-                src="https://i.ibb.co/nssTgr1Y/Chat-GPT-Image-Aug-15-2026-12-23-18-AM.png"
+                src="https://i.ibb.co/202G6V4B/knowsash.jpg"
                 alt="Fashion Model"
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -512,7 +516,7 @@ export default function HomePage() {
           {/* Mobile Overlay Layout */}
           <div className="block md:hidden relative w-full aspect-[4/5] overflow-hidden group shadow-md">
             <img
-              src="https://i.ibb.co/nssTgr1Y/Chat-GPT-Image-Aug-15-2026-12-23-18-AM.png"
+              src="https://i.ibb.co/202G6V4B/knowsash.jpg"
               alt="Fashion Model"
               className="absolute inset-0 w-full h-full object-cover object-top"
             />
