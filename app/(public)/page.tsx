@@ -30,7 +30,7 @@ interface Product {
 const CATEGORY_FILTERS = [
   { key: 'men', label: 'MEN', image: 'https://i.ibb.co/270gTY6Y/mensection.jpg' },
   { key: 'women', label: 'WOMEN', image: 'https://i.ibb.co/WvpTj8q7/womensection.jpg' },
-  { key: 'accessories', label: 'ACCESSORIES', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&auto=format&fit=crop&q=80' },
+  // { key: 'accessories', label: 'ACCESSORIES', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&auto=format&fit=crop&q=80' },
 ];
 
 /* ─── Product Card ─── */
@@ -264,8 +264,8 @@ export default function HomePage() {
             <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-widest text-gray-900 text-center">Shop by Category</h2>
           </div>
 
-          {/* 3 filter cards: Men / Women / Accessories */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-4">
+          {/* filter cards: Men / Women */}
+          <div className="grid grid-cols-2 max-w-2xl mx-auto gap-3 sm:gap-4">
             {CATEGORY_FILTERS.map(cat => {
               return (
                 <Link

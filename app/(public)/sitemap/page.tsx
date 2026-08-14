@@ -9,7 +9,7 @@ export default function SitemapPage() {
         { label: 'Homepage', href: '/' },
         { label: 'Men Apparel', href: '/men' },
         { label: 'Women Apparel', href: '/women' },
-        { label: 'Accessories', href: '/accessories' },
+        {/* { label: 'Accessories', href: '/accessories' }, */}
         { label: 'Special Sale', href: '/sale' },
       ],
     },
