@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 import { AuthProvider } from "@/contexts/AuthContext";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import GlobalPreloader from "@/components/GlobalPreloader";
+import LaunchWrapper from "@/components/LaunchWrapper";
 
 export default function RootLayout({
   children,
@@ -31,9 +32,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col overflow-x-hidden w-full">
         <GlobalPreloader />
-        <GoogleOAuthProvider clientId={clientId}>
-          <AuthProvider>{children}</AuthProvider>
-        </GoogleOAuthProvider>
+        <LaunchWrapper>
+          <GoogleOAuthProvider clientId={clientId}>
+            <AuthProvider>{children}</AuthProvider>
+          </GoogleOAuthProvider>
+        </LaunchWrapper>
       </body>
     </html>
   );
