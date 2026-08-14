@@ -488,7 +488,7 @@ export default function HomePage() {
           <div className="hidden md:grid grid-cols-2 gap-8 items-center bg-gray-50">
             <div className="relative w-full overflow-hidden h-[500px]">
               <img
-                src="https://i.ibb.co/202G6V4B/knowsash.jpg"
+                src="https://i.ibb.co/tMybNqQB/aboutsash.jpg"
                 alt="Fashion Model"
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -516,7 +516,7 @@ export default function HomePage() {
           {/* Mobile Overlay Layout */}
           <div className="block md:hidden relative w-full aspect-[4/5] overflow-hidden group shadow-md">
             <img
-              src="https://i.ibb.co/202G6V4B/knowsash.jpg"
+              src="https://i.ibb.co/tMybNqQB/aboutsash.jpg"
               alt="Fashion Model"
               className="absolute inset-0 w-full h-full object-cover object-top"
             />

@@ -4,10 +4,10 @@ import Link from 'next/link';
 export default function AboutUsPage() {
   return (
     <div className="bg-white text-black font-sans min-h-screen overflow-x-hidden flex flex-col">
-      
+
       {/* HERO SECTION - Fits in one screen */}
       <section className="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col justify-between pt-6 pb-6" style={{ minHeight: 'calc(100vh - 64px)' }}>
-        
+
         {/* Top Massive Text */}
         <div className="text-center w-full shrink-0 flex items-center justify-center mb-6">
           <h1 className="text-[10vw] sm:text-[9vw] xl:text-[120px] leading-none tracking-tighter text-black uppercase whitespace-nowrap">
@@ -17,21 +17,21 @@ export default function AboutUsPage() {
 
         {/* Content Container */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 items-end flex-grow">
-          
+
           {/* Left Side Image */}
           <div className="w-full flex flex-col justify-end h-full">
-            <img 
-              src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=600" 
-              alt="Models Left" 
+            <img
+              src="https://i.ibb.co/2LDvSbz/knowsashimg.jpg"
+              alt="Models Left"
               className="w-full h-full max-h-[50vh] object-cover"
             />
           </div>
 
           {/* Center Main Image */}
           <div className="w-full flex justify-center h-full">
-            <img 
-              src="https://images.unsplash.com/photo-1506152983158-b4a74a01c721?auto=format&fit=crop&q=80&w=800" 
-              alt="Main Model" 
+            <img
+              src="https://i.ibb.co/zWD683jc/product3.jpg"
+              alt="Main Model"
               className="w-full h-full max-h-[55vh] object-cover"
             />
           </div>
@@ -45,10 +45,10 @@ export default function AboutUsPage() {
               Fueled by a deep-rooted passion, SashVOGUE's journey reflects our fearless ambition to redefine modern fashion on a global scale. We bring quality, utility, and timeless garments directly to you.
             </p>
             <div className="pt-2">
-              <img 
-                src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=600" 
-                alt="Right detail" 
-                className="w-[180px] h-[120px] object-cover" 
+              <img
+                src="https://i.ibb.co/fzV1QYk5/knowsashimg2.jpg"
+                alt="Right detail"
+                className="w-[180px] h-[120px] object-cover"
               />
             </div>
           </div>
@@ -58,15 +58,15 @@ export default function AboutUsPage() {
       {/* OUR STORY SECTION */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20 pt-16 w-full">
         <h2 className="text-4xl sm:text-5xl font-black uppercase tracking-widest text-black text-center mb-12">Our Story</h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left Image */}
           <div className="w-full h-full relative aspect-[4/5] sm:aspect-auto sm:h-[500px] overflow-hidden">
-             <img 
-                src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=800" 
-                alt="Our Story" 
-                className="absolute inset-0 w-full h-full object-cover"
-             />
+            <img
+              src="https://i.ibb.co/4R3LX6tc/poster.jpg"
+              alt="Our Story"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
           </div>
           {/* Right Content */}
           <div className="flex flex-col space-y-6 md:pl-8">
