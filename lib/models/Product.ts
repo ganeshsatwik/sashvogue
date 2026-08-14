@@ -23,6 +23,7 @@ export interface IProduct extends Document {
   ratings: number;
   numReviews: number;
   tags: string[];
+  shippingCharge?: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -59,6 +60,7 @@ const ProductSchema: Schema = new Schema(
     ratings: { type: Number, default: 0 },
     numReviews: { type: Number, default: 0 },
     tags: { type: [String], default: [] },
+    shippingCharge: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

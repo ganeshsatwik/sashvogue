@@ -27,6 +27,7 @@ interface Product {
   ratings: number;
   numReviews: number;
   slug?: string;
+  shippingCharge?: number;
 }
 
 interface RelatedProduct {
@@ -205,16 +206,23 @@ export default function ProductDetails({ product }: { product: Product }) {
           </div>
 
           {/* Price */}
-          <div className="flex items-baseline gap-3 border-t border-b border-gray-100 py-4">
-            <span className="text-3xl font-black text-gray-900">₹{displayPrice.toLocaleString()}</span>
-            {product.compareAtPrice && product.compareAtPrice > displayPrice && (
-              <>
-                <span className="text-lg text-gray-400 line-through">₹{product.compareAtPrice.toLocaleString()}</span>
-                <span className="text-xs font-bold text-red-600 bg-red-50 border border-red-100 px-2.5 py-1 rounded-full">
-                  Save ₹{(product.compareAtPrice - displayPrice).toLocaleString()}
-                </span>
-              </>
-            )}
+          <div className="flex flex-col border-t border-b border-gray-100 py-4">
+            <div className="flex items-baseline gap-3">
+              <span className="text-3xl font-black text-gray-900">₹{displayPrice.toLocaleString()}</span>
+              {product.compareAtPrice && product.compareAtPrice > displayPrice && (
+                <>
+                  <span className="text-lg text-gray-400 line-through">₹{product.compareAtPrice.toLocaleString()}</span>
+                  <span className="text-xs font-bold text-red-600 bg-red-50 border border-red-100 px-2.5 py-1 rounded-full">
+                    Save ₹{(product.compareAtPrice - displayPrice).toLocaleString()}
+                  </span>
+                </>
+              )}
+            </div>
+            <p className="text-xs text-gray-500 mt-2 font-semibold">
+              {product.shippingCharge && product.shippingCharge > 0 
+                ? `+ ₹${product.shippingCharge} Shipping Charge` 
+                : 'Free Shipping'}
+            </p>
           </div>
 
           {/* Color */}
@@ -326,6 +334,9 @@ export default function ProductDetails({ product }: { product: Product }) {
                 {colors.length > 0 && <li><span className="font-semibold text-gray-700">Colors: </span>{colors.join(', ')}</li>}
                 <li><span className="font-semibold text-gray-700">Payment: </span>{product.paymentMethods?.join(' & ')}</li>
                 <li><span className="font-semibold text-gray-700">Category: </span>{product.category?.name}</li>
+                {product.shippingCharge && product.shippingCharge > 0 && (
+                  <li><span className="font-semibold text-gray-700">Shipping: </span>₹{product.shippingCharge}</li>
+                )}
               </ul>
             )}
           </div>
