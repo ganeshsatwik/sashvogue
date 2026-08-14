@@ -23,7 +23,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
         { tags: { $regex: query, $options: 'i' } },
       ],
       status: 'published',
-    });
+    }).sort({ createdAt: -1 });
   }
 
   if (products.length === 0) {

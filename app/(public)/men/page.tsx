@@ -18,7 +18,7 @@ export default async function MenCategoryPage() {
   const products = await Product.find({
     category: category._id,
     status: 'published',
-  });
+  }).sort({ createdAt: -1 });
 
   const formattedProducts = products.map(p => ({
     id: p._id.toString(),
