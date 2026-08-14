@@ -46,7 +46,7 @@ export default function AboutUsPage() {
             </p>
             <div className="pt-2">
               <img
-                src="https://i.ibb.co/fzV1QYk5/knowsashimg2.jpg"
+                src="https://i.ibb.co/mV9NDYJN/aboutsashimg3.jpg"
                 alt="Right detail"
                 className="w-[180px] h-[120px] object-cover"
               />

@@ -340,10 +340,10 @@ export default function HomePage() {
                   {/* Text Content */}
                   <div className="w-1/2 flex flex-col items-start justify-center py-2">
                     <span className="text-[9px] text-[#b89b5e] font-semibold tracking-[0.2em] uppercase mb-1.5">
-                      NEW IN
+                      REFRESH
                     </span>
                     <h3 className="text-xl font-black tracking-widest text-gray-900 uppercase mb-2 leading-tight">
-                      SUMMER EDIT
+                      YOUR WARDROBE
                     </h3>
                     <p className="text-[10px] text-gray-600 mb-4 leading-relaxed pr-2">
                       Discover the latest styles<br />curated for the season.
