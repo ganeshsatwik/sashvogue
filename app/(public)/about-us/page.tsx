@@ -30,7 +30,7 @@ export default function AboutUsPage() {
           {/* Center Main Image */}
           <div className="w-full flex justify-center h-full">
             <img
-              src="https://i.ibb.co/zWD683jc/product3.jpg"
+              src="https://i.ibb.co/zH4LgMpc/knowsashimg3.jpg"
               alt="Main Model"
               className="w-full h-full max-h-[55vh] object-cover"
             />
