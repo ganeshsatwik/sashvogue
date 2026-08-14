@@ -28,8 +28,8 @@ interface Product {
 }
 
 const CATEGORY_FILTERS = [
-  { key: 'men', label: 'MEN', image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&auto=format&fit=crop&q=80' },
-  { key: 'women', label: 'WOMEN', image: 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&auto=format&fit=crop&q=80' },
+  { key: 'men', label: 'MEN', image: 'https://i.ibb.co/WvVdhkmZ/Untitled-design-4.png' },
+  { key: 'women', label: 'WOMEN', image: 'https://i.ibb.co/Gftdtcwd/Untitled-design-5.png' },
   { key: 'accessories', label: 'ACCESSORIES', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&auto=format&fit=crop&q=80' },
 ];
 
@@ -168,59 +168,59 @@ export default function HomePage() {
       {banner ? (
         <section className="relative w-full overflow-hidden bg-[#F6E6D7]" style={{ height: '80svh', minHeight: 600 }}>
 
-        {/* Massive Background Text Centered */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden px-4">
-          <h1 className={`text-[20vw] md:text-[15vw] leading-none font-black tracking-tighter text-white uppercase select-none text-center transition-opacity duration-500 ${fadingOut ? 'opacity-0' : 'opacity-100'}`}>
-            {banner.bgText}
-          </h1>
-        </div>
+          {/* Massive Background Text Centered */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden px-4">
+            <h1 className={`text-[20vw] md:text-[15vw] leading-none font-black tracking-tighter text-white uppercase select-none text-center transition-opacity duration-500 ${fadingOut ? 'opacity-0' : 'opacity-100'}`}>
+              {banner.bgText}
+            </h1>
+          </div>
 
-        {/* Center Model Image with Fade Effect */}
-        <div className={`absolute bottom-0 right-0 md:left-1/2 md:right-auto md:-translate-x-1/2 h-[75%] md:h-[95%] z-10 pointer-events-none transition-opacity duration-500 ${fadingOut ? 'opacity-0' : 'opacity-100'}`}>
-          <img
-            key={banner._id}
-            src={banner.imageUrl}
-            alt="Model"
-            className="h-full w-auto max-w-none object-contain object-bottom"
-          />
-        </div>
+          {/* Center Model Image with Fade Effect */}
+          <div className={`absolute bottom-0 right-0 md:left-1/2 md:right-auto md:-translate-x-1/2 h-[75%] md:h-[95%] z-10 pointer-events-none transition-opacity duration-500 ${fadingOut ? 'opacity-0' : 'opacity-100'}`}>
+            <img
+              key={banner._id}
+              src={banner.imageUrl}
+              alt="Model"
+              className="h-full w-auto max-w-none object-contain object-bottom"
+            />
+          </div>
 
-        {/* Foreground Content on the Left with Fade Effect */}
-        <div className="absolute inset-0 flex flex-col items-start justify-start pt-8 md:pt-0 md:justify-center pl-5 sm:pl-10 md:pl-20 z-20 pointer-events-none text-left">
-          <div className={`pointer-events-auto w-[55%] sm:w-auto sm:max-w-xs md:max-w-sm transition-all duration-500 ${fadingOut ? 'opacity-0 -translate-x-4' : 'opacity-100 translate-x-0'}`}>
-            <p className="text-[10px] md:text-[12px] font-bold uppercase tracking-[0.4em] text-gray-700 mb-2 md:mb-3 bg-white/40 md:bg-transparent px-2 py-0.5 rounded md:rounded-none inline-block md:block">New Collection</p>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-gray-900 tracking-tighter leading-none uppercase mb-3 md:mb-4 drop-shadow-sm break-words">
-              {banner.title}
-            </h2>
-            {banner.subtitle && (
-              <p className="text-xs sm:text-sm text-gray-800 md:text-gray-700 font-bold md:font-medium mb-6 md:mb-8 bg-white/40 md:bg-transparent px-3 py-1 md:p-0 rounded md:rounded-none inline-block md:block">
-                {banner.subtitle}
-              </p>
-            )}
-            <div className="w-full">
-              <Link href={banner.linkUrl} className="inline-block bg-black text-white font-bold text-xs px-5 py-2.5 md:px-8 md:py-3.5 uppercase tracking-[0.2em] hover:bg-gray-800 transition-colors shadow-xl md:shadow-none">
-                SHOP NOW
-              </Link>
+          {/* Foreground Content on the Left with Fade Effect */}
+          <div className="absolute inset-0 flex flex-col items-start justify-start pt-8 md:pt-0 md:justify-center pl-5 sm:pl-10 md:pl-20 z-20 pointer-events-none text-left">
+            <div className={`pointer-events-auto w-[55%] sm:w-auto sm:max-w-xs md:max-w-sm transition-all duration-500 ${fadingOut ? 'opacity-0 -translate-x-4' : 'opacity-100 translate-x-0'}`}>
+              <p className="text-[10px] md:text-[12px] font-bold uppercase tracking-[0.4em] text-gray-700 mb-2 md:mb-3 bg-white/40 md:bg-transparent px-2 py-0.5 rounded md:rounded-none inline-block md:block">New Collection</p>
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-gray-900 tracking-tighter leading-none uppercase mb-3 md:mb-4 drop-shadow-sm break-words">
+                {banner.title}
+              </h2>
+              {banner.subtitle && (
+                <p className="text-xs sm:text-sm text-gray-800 md:text-gray-700 font-bold md:font-medium mb-6 md:mb-8 bg-white/40 md:bg-transparent px-3 py-1 md:p-0 rounded md:rounded-none inline-block md:block">
+                  {banner.subtitle}
+                </p>
+              )}
+              <div className="w-full">
+                <Link href={banner.linkUrl} className="inline-block bg-black text-white font-bold text-xs px-5 py-2.5 md:px-8 md:py-3.5 uppercase tracking-[0.2em] hover:bg-gray-800 transition-colors shadow-xl md:shadow-none">
+                  SHOP NOW
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Arrows and Dots */}
-        {banners.length > 1 && (
-          <>
-            <button onClick={prev} className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 bg-white/10 hover:bg-white/30 flex items-center justify-center text-white transition-colors rounded-full backdrop-blur-sm pointer-events-auto">
-              <ChevronLeft size={20} />
-            </button>
-            <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 bg-white/10 hover:bg-white/30 flex items-center justify-center text-white transition-colors rounded-full backdrop-blur-sm pointer-events-auto">
-              <ChevronRight size={20} />
-            </button>
-            <div className="absolute bottom-7 left-1/2 -translate-x-1/2 z-30 flex gap-2 pointer-events-auto">
-              {banners.map((_, i) => (
-                <button key={i} onClick={() => { resetTimer(); goTo(i); }}
-                  className={`transition-all duration-300 rounded-full ${i === activeSlide ? 'bg-white w-6 h-1.5' : 'bg-white/40 w-2 h-1.5 hover:bg-white/70'}`}
-                />
-              ))}
-            </div>
+          {/* Arrows and Dots */}
+          {banners.length > 1 && (
+            <>
+              <button onClick={prev} className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 bg-white/10 hover:bg-white/30 flex items-center justify-center text-white transition-colors rounded-full backdrop-blur-sm pointer-events-auto">
+                <ChevronLeft size={20} />
+              </button>
+              <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 bg-white/10 hover:bg-white/30 flex items-center justify-center text-white transition-colors rounded-full backdrop-blur-sm pointer-events-auto">
+                <ChevronRight size={20} />
+              </button>
+              <div className="absolute bottom-7 left-1/2 -translate-x-1/2 z-30 flex gap-2 pointer-events-auto">
+                {banners.map((_, i) => (
+                  <button key={i} onClick={() => { resetTimer(); goTo(i); }}
+                    className={`transition-all duration-300 rounded-full ${i === activeSlide ? 'bg-white w-6 h-1.5' : 'bg-white/40 w-2 h-1.5 hover:bg-white/70'}`}
+                  />
+                ))}
+              </div>
             </>
           )}
         </section>
@@ -329,14 +329,14 @@ export default function HomePage() {
                   </h2>
                   <div className="w-12 h-px bg-[#b89b5e]"></div>
                 </div>
-                
+
                 {/* Content part (Side-by-side) */}
                 <div className="flex flex-row items-center gap-4 px-4">
                   {/* Image */}
                   <Link href="/new-collection" className="w-1/2 aspect-[4/5] relative overflow-hidden group block">
-                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=600" alt="Summer Edit" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <img src="https://i.ibb.co/Y6hxn19/Untitled-design-6.png" />
                   </Link>
-                  
+
                   {/* Text Content */}
                   <div className="w-1/2 flex flex-col items-start justify-center py-2">
                     <span className="text-[9px] text-[#b89b5e] font-semibold tracking-[0.2em] uppercase mb-1.5">
@@ -446,15 +446,6 @@ export default function HomePage() {
       <ScrollReveal animation="fade-up">
         <section className="relative w-full bg-[#463f3a] overflow-hidden mb-20 sm:mb-28 py-6 sm:py-8 text-center">
 
-          {/* Left Model */}
-          <div className="hidden md:block absolute left-0 bottom-0 h-[90%] sm:h-[110%] opacity-90 pointer-events-none transform -translate-x-[5%] sm:translate-x-10 z-0">
-            <img src="https://freepngimg.com/thumb/fashion/3-2-fashion-model-transparent.png" alt="Women Model" className="h-full w-auto object-contain object-bottom" onError={(e) => { e.currentTarget.style.display = 'none' }} />
-          </div>
-
-          {/* Right Model */}
-          <div className="hidden md:block absolute right-0 bottom-0 h-[90%] sm:h-[110%] opacity-90 pointer-events-none transform translate-x-[5%] sm:-translate-x-10 z-0">
-            <img src="https://www.pngall.com/wp-content/uploads/5/Model-Man-PNG.png" alt="Men Model" className="h-full w-auto object-contain object-bottom" onError={(e) => { e.currentTarget.src = '/bannerimg3.png' }} />
-          </div>
 
           <div className="relative z-10 max-w-2xl mx-auto px-4 flex flex-col items-center">
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/60 mb-2">Limited Offer</p>
@@ -488,12 +479,12 @@ export default function HomePage() {
       ═══════════════════════════════ */}
       <ScrollReveal animation="fade-right">
         <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-12 sm:pb-14">
-          
+
           {/* Desktop/Tablet Layout */}
           <div className="hidden md:grid grid-cols-2 gap-8 items-center bg-gray-50">
             <div className="relative w-full overflow-hidden h-[500px]">
               <img
-                src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=800"
+                src="https://i.ibb.co/nssTgr1Y/Chat-GPT-Image-Aug-15-2026-12-23-18-AM.png"
                 alt="Fashion Model"
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -521,13 +512,13 @@ export default function HomePage() {
           {/* Mobile Overlay Layout */}
           <div className="block md:hidden relative w-full aspect-[4/5] overflow-hidden group shadow-md">
             <img
-              src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=800"
+              src="https://i.ibb.co/nssTgr1Y/Chat-GPT-Image-Aug-15-2026-12-23-18-AM.png"
               alt="Fashion Model"
               className="absolute inset-0 w-full h-full object-cover object-top"
             />
             {/* Dark Gradient Overlay for Text Readability */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-            
+
             <div className="absolute bottom-0 inset-x-0 flex flex-col items-center justify-end p-6 text-center">
               <h2 className="text-2xl uppercase tracking-widest text-white mb-3">
                 <span className="font-light">KNOW</span> <span className="font-black">SASHVOGUE</span>
