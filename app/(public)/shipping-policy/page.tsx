@@ -21,7 +21,7 @@ export default function ShippingPolicyPage() {
 
         <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wide">Shipping Rates</h3>
         <p>
-          We offer flat-rate shipping of ₹69 on orders under ₹1999. Free shipping is automatically applied on checkout for orders above ₹1999.
+          We offer flat-rate shipping of ₹99 on orders under ₹1999. Free shipping is automatically applied on checkout for orders above ₹1999.
         </p>
       </div>
     </div>
