@@ -216,7 +216,7 @@ export default function CheckoutPage() {
   // Pricing calculations
   const subtotal = items.reduce((total, item) => total + item.price * item.quantity, 0);
   const discount = appliedCoupon?.discount || 0;
-  const shippingFee = subtotal - discount >= 1999 || subtotal === 0 ? 0 : 99;
+  const shippingFee = subtotal - discount >= 1999 || subtotal === 0 ? 0 : 69;
   const total = subtotal - discount + shippingFee;
 
   const payeeUPI = settings?.upiId || 'dyhardx@okaxis';

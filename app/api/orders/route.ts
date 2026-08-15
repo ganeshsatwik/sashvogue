@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const shippingFee = subtotal >= 1999 ? 0 : 99;
+    const shippingFee = subtotal >= 1999 ? 0 : 69;
     const totalPrice = subtotal - discountAmount + shippingFee;
 
     const orderId = generateId('ORD');

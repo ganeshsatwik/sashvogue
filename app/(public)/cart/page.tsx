@@ -16,7 +16,7 @@ export default function CartPage() {
   }, []);
 
   const subtotal = items.reduce((total, item) => total + item.price * item.quantity, 0);
-  const shippingFee = subtotal >= 1999 || subtotal === 0 ? 0 : 99;
+  const shippingFee = subtotal >= 1999 || subtotal === 0 ? 0 : 69;
   const total = subtotal + shippingFee;
 
   if (!mounted) {
