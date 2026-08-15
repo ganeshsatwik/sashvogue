@@ -79,11 +79,6 @@ export default function CategoryLayout({ title, tagline, introImages, products }
     titleColor = "text-blue-700";
     taglineColor = "text-blue-900";
     lineColor = "bg-blue-200";
-  } else if (upperTitle.includes('ACCESSORIES')) {
-    bannerBg = "bg-amber-50";
-    titleColor = "text-amber-700";
-    taglineColor = "text-amber-900";
-    lineColor = "bg-amber-200";
   }
 
   return (

@@ -6,7 +6,7 @@ import '@/lib/models/Category';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const gender = searchParams.get('gender'); // 'men', 'women', 'accessories'
+    const gender = searchParams.get('gender'); // 'men', 'women'
     const tag = searchParams.get('tag'); // 'trending', 'best-seller'
     const limit = parseInt(searchParams.get('limit') || '12');
 

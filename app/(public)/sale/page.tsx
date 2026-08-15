@@ -5,7 +5,7 @@ export default function SaleCategoryPage() {
   return (
     <CategoryLayout
       title="SALE"
-      tagline="Act fast on limited stock! Discover discounted apparel, footwear, and accessories from past seasons at unbeatable prices."
+      tagline="Act fast on limited stock! Discover discounted apparel and footwear from past seasons at unbeatable prices."
       introImages={[]} // Minimal banner
       products={[]}
     />

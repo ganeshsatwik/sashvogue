@@ -30,7 +30,6 @@ interface Product {
 const CATEGORY_FILTERS = [
   { key: 'men', label: 'MEN', image: 'https://i.ibb.co/270gTY6Y/mensection.jpg' },
   { key: 'women', label: 'WOMEN', image: 'https://i.ibb.co/WvpTj8q7/womensection.jpg' },
-  // { key: 'accessories', label: 'ACCESSORIES', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&auto=format&fit=crop&q=80' },
 ];
 
 /* ─── Product Card ─── */
@@ -101,6 +100,7 @@ function Skeleton() {
 
 export default function HomePage() {
   const [banners, setBanners] = useState<Banner[]>([]);
+  const [loadingBanners, setLoadingBanners] = useState(true);
   const [activeSlide, setActiveSlide] = useState(0);
   const [fadingOut, setFadingOut] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -110,13 +110,31 @@ export default function HomePage() {
   const [bestSellerProducts, setBestSellerProducts] = useState<Product[]>([]);
   const [loadingTrending, setLoadingTrending] = useState(true);
   const [loadingBest, setLoadingBest] = useState(true);
+  const [homepageConfig, setHomepageConfig] = useState<any>(null);
 
   // Fetch banners
   useEffect(() => {
+    const cachedBanners = localStorage.getItem('sash_banners');
+    if (cachedBanners) {
+      try {
+        const parsed = JSON.parse(cachedBanners);
+        if (parsed?.length > 0) {
+          setBanners(parsed);
+          setLoadingBanners(false);
+        }
+      } catch (e) {}
+    }
+
     fetch('/api/banners')
       .then(r => r.json())
-      .then(d => { if (d.success && d.banners?.length > 0) setBanners(d.banners); })
-      .catch(() => { });
+      .then(d => { 
+        if (d.success && d.banners?.length > 0) {
+          setBanners(d.banners);
+          localStorage.setItem('sash_banners', JSON.stringify(d.banners));
+        }
+      })
+      .catch(() => { })
+      .finally(() => setLoadingBanners(false));
   }, []);
 
   // Slider
@@ -141,18 +159,48 @@ export default function HomePage() {
 
   // Fetch products
   useEffect(() => {
-    setLoadingTrending(true);
-    setLoadingBest(true);
+    fetch('/api/homepage')
+      .then(r => r.json())
+      .then(d => {
+        if (d.success) setHomepageConfig(d.settings);
+      })
+      .catch(() => {});
+
+    const cachedTrending = localStorage.getItem('sash_trending');
+    if (cachedTrending) {
+      try {
+        setTrendingProducts(JSON.parse(cachedTrending));
+        setLoadingTrending(false);
+      } catch (e) {}
+    }
+
+    const cachedBestSeller = localStorage.getItem('sash_bestseller');
+    if (cachedBestSeller) {
+      try {
+        setBestSellerProducts(JSON.parse(cachedBestSeller));
+        setLoadingBest(false);
+      } catch (e) {}
+    }
 
     fetch(`/api/products?tag=trending&limit=4`)
       .then(r => r.json())
-      .then(d => { if (d.success) setTrendingProducts(d.products); })
+      .then(d => { 
+        if (d.success) {
+          setTrendingProducts(d.products);
+          localStorage.setItem('sash_trending', JSON.stringify(d.products));
+        }
+      })
       .catch(() => { })
       .finally(() => setLoadingTrending(false));
 
     fetch(`/api/products?tag=best-seller&limit=10`)
       .then(r => r.json())
-      .then(d => { if (d.success) setBestSellerProducts(d.products); })
+      .then(d => { 
+        if (d.success) {
+          setBestSellerProducts(d.products);
+          localStorage.setItem('sash_bestseller', JSON.stringify(d.products));
+        }
+      })
       .catch(() => { })
       .finally(() => setLoadingBest(false));
   }, []);
@@ -224,13 +272,15 @@ export default function HomePage() {
             </>
           )}
         </section>
-      ) : (
+      ) : !loadingBanners ? (
         <section className="relative w-full flex items-center justify-center bg-gray-50 border-b border-gray-200" style={{ height: '40svh' }}>
           <div className="text-center">
             <h2 className="text-xl font-bold uppercase tracking-widest text-gray-400">Welcome to SASH</h2>
             <p className="text-xs text-gray-500 mt-2">Exciting new collections dropping soon.</p>
           </div>
         </section>
+      ) : (
+        <section className="relative w-full bg-gray-100 animate-pulse" style={{ height: '80svh', minHeight: 600 }}></section>
       )}
 
       {/* ═══════════════════════════════
@@ -266,7 +316,7 @@ export default function HomePage() {
 
           {/* filter cards: Men / Women */}
           <div className="grid grid-cols-2 max-w-2xl mx-auto gap-3 sm:gap-4">
-            {CATEGORY_FILTERS.map(cat => {
+            {(homepageConfig?.categories || CATEGORY_FILTERS).map((cat: any) => {
               return (
                 <Link
                   key={cat.key}
@@ -300,7 +350,7 @@ export default function HomePage() {
           NEW COLLECTIONS SECTION
       ═══════════════════════════════ */}
       <section className="hidden sm:flex mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-6 cursor-pointer justify-center">
-        <Link href="/new-collection" className="flex flex-col items-center justify-center relative hover:opacity-75 transition-opacity">
+        <Link href={homepageConfig?.newSeason?.linkUrl || "/new-collection"} className="flex flex-col items-center justify-center relative hover:opacity-75 transition-opacity">
           <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-widest text-gray-900 text-center">
             NEW Collections
           </h2>
@@ -333,8 +383,8 @@ export default function HomePage() {
                 {/* Content part (Side-by-side) */}
                 <div className="flex flex-row items-center gap-4 px-4">
                   {/* Image */}
-                  <Link href="/new-collection" className="w-1/2 aspect-[4/5] relative overflow-hidden group block">
-                    <img src="https://i.ibb.co/Q3Dgp0c5/modelimg.jpg" />
+                  <Link href={homepageConfig?.newSeason?.linkUrl || "/new-collection"} className="w-1/2 aspect-[4/5] relative overflow-hidden group block">
+                    <img src={homepageConfig?.newSeason?.backImage || "https://i.ibb.co/Q3Dgp0c5/modelimg.jpg"} alt="New Collection" />
                   </Link>
 
                   {/* Text Content */}
@@ -343,12 +393,12 @@ export default function HomePage() {
                       REFRESH
                     </span>
                     <h3 className="text-xl font-black tracking-widest text-gray-900 uppercase mb-2 leading-tight">
-                      YOUR WARDROBE
+                      {homepageConfig?.newSeason?.title || "YOUR WARDROBE"}
                     </h3>
                     <p className="text-[10px] text-gray-600 mb-4 leading-relaxed pr-2">
-                      Discover the latest styles<br />curated for the season.
+                      {homepageConfig?.newSeason?.description || "Discover the latest styles\ncurated for the season."}
                     </p>
-                    <Link href="/new-collection" className="inline-flex items-center gap-2 bg-[#171717] text-white text-[8px] font-bold px-4 py-2.5 uppercase tracking-[0.2em] hover:bg-black transition-colors">
+                    <Link href={homepageConfig?.newSeason?.linkUrl || "/new-collection"} className="inline-flex items-center gap-2 bg-[#171717] text-white text-[8px] font-bold px-4 py-2.5 uppercase tracking-[0.2em] hover:bg-black transition-colors">
                       SHOP NOW <span className="text-[10px] font-light">→</span>
                     </Link>
                   </div>
@@ -372,12 +422,12 @@ export default function HomePage() {
 
                 {/* Back Image */}
                 <div className="relative w-[60%] sm:w-[50%] aspect-[3/4] ml-auto">
-                  <img src="https://i.ibb.co/Q3Dgp0c5/modelimg.jpg" alt="Collection 1" className="w-full h-full object-cover" />
+                  <img src={homepageConfig?.newSeason?.backImage || "https://i.ibb.co/Q3Dgp0c5/modelimg.jpg"} alt="Collection 1" className="w-full h-full object-cover" />
                 </div>
 
                 {/* Front Image */}
                 <div className="absolute bottom-[-10%] left-4 sm:left-12 w-[55%] sm:w-[50%] aspect-[4/5] shadow-2xl z-20">
-                  <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=600" alt="Collection 2" className="w-full h-full object-cover" />
+                  <img src={homepageConfig?.newSeason?.frontImage || "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=600"} alt="Collection 2" className="w-full h-full object-cover" />
                 </div>
 
               </div>
@@ -394,11 +444,11 @@ export default function HomePage() {
                 </div>
 
                 <div className="max-w-md w-full flex flex-col items-center sm:items-start text-center sm:text-left">
-                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif text-gray-900 mb-3 sm:mb-6">New Season Collection</h2>
+                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif text-gray-900 mb-3 sm:mb-6">{homepageConfig?.newSeason?.title || "New Season Collection"}</h2>
                   <p className="hidden sm:block text-sm text-gray-600 font-medium leading-relaxed mb-8">
-                    Refresh your wardrobe with our newest collection, where contemporary trends meet timeless elegance in pieces you'll reach for season after season.
+                    {homepageConfig?.newSeason?.description || "Refresh your wardrobe with our newest collection, where contemporary trends meet timeless elegance in pieces you'll reach for season after season."}
                   </p>
-                  <Link href="/new-collection" className="inline-block bg-[#1a1a1a] text-white text-[10px] sm:text-xs font-bold px-8 py-3.5 uppercase tracking-widest hover:bg-black transition-colors mt-1 sm:mt-0">
+                  <Link href={homepageConfig?.newSeason?.linkUrl || "/new-collection"} className="inline-block bg-[#1a1a1a] text-white text-[10px] sm:text-xs font-bold px-8 py-3.5 uppercase tracking-widest hover:bg-black transition-colors mt-1 sm:mt-0">
                     SHOP NOW
                   </Link>
                 </div>
@@ -448,19 +498,19 @@ export default function HomePage() {
 
           {/* Right Model */}
           <div className="hidden md:block absolute right-0 bottom-0 h-[90%] sm:h-[110%] opacity-90 pointer-events-none transform translate-x-[5%] sm:-translate-x-10 z-0">
-            <img src="https://i.ibb.co/9CVQKqC/Untitled-design-7-removebg-preview.png" alt="Men Model" className="h-full w-auto object-contain object-bottom" onError={(e) => { e.currentTarget.src = '/bannerimg3.png' }} />
+            <img src={homepageConfig?.promo?.rightImage || "https://i.ibb.co/9CVQKqC/Untitled-design-7-removebg-preview.png"} alt="Men Model" className="h-full w-auto object-contain object-bottom" onError={(e) => { e.currentTarget.src = '/bannerimg3.png' }} />
           </div>
 
           <div className="relative z-10 max-w-2xl mx-auto px-4 flex flex-col items-center">
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/60 mb-2">Limited Offer</p>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-white mb-4 leading-tight drop-shadow-md">
-              Free Shipping on Orders ₹999+
+              {homepageConfig?.promo?.title || "Free Shipping on Orders ₹999+"}
             </h2>
 
             {/* Styled Code Display matching Timer look */}
             <div className="flex items-center justify-center gap-4 sm:gap-6 mb-4">
               <div className="flex flex-col items-center">
-                <span className="text-3xl sm:text-4xl lg:text-5xl font-serif text-white">SASHFREE</span>
+                <span className="text-3xl sm:text-4xl lg:text-5xl font-serif text-white">{homepageConfig?.promo?.code || "SASHFREE"}</span>
                 <span className="text-[9px] uppercase tracking-[0.2em] text-white/50 mt-1">USE CODE</span>
               </div>
             </div>
@@ -469,7 +519,7 @@ export default function HomePage() {
               apply at checkout
             </p>
 
-            <Link href="/sale"
+            <Link href={homepageConfig?.promo?.linkUrl || "/sale"}
               className="inline-block bg-[#1a1a1a] text-white font-bold text-xs px-10 py-3.5 uppercase tracking-[0.2em] hover:bg-black transition-colors"
             >
               SHOP NOW
@@ -488,23 +538,23 @@ export default function HomePage() {
           <div className="hidden md:grid grid-cols-2 gap-8 items-center bg-gray-50">
             <div className="relative w-full overflow-hidden h-[500px]">
               <img
-                src="https://i.ibb.co/tMybNqQB/aboutsash.jpg"
+                src={homepageConfig?.about?.image || "https://i.ibb.co/tMybNqQB/aboutsash.jpg"}
                 alt="Fashion Model"
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
             <div className="flex flex-col items-start space-y-6 px-12 py-8">
-              <h2 className="text-3xl md:text-4xl uppercase tracking-widest text-gray-900"><span className="font-normal">KNOW</span> <span className="font-black">SASHVOGUE</span></h2>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Fueled by a deep-rooted passion, SashVOGUE's journey reflects our fearless ambition to redefine modern menswear and womenswear on a global scale. We bring quality, utility, and timeless garments directly to you.
+              <h2 className="text-3xl md:text-4xl uppercase tracking-widest text-gray-900 whitespace-pre-wrap">{homepageConfig?.about?.title || "KNOW SASHVOGUE"}</h2>
+              <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-wrap">
+                {homepageConfig?.about?.description || "Fueled by a deep-rooted passion, SashVOGUE's journey reflects our fearless ambition to redefine modern menswear and womenswear on a global scale. We bring quality, utility, and timeless garments directly to you."}
               </p>
               <div className="flex gap-4 pt-4 w-full">
-                <a href="https://www.instagram.com/sashvogue.in" target="_blank" rel="noreferrer"
+                <a href={homepageConfig?.about?.instagramUrl || "https://www.instagram.com/sashvogue.in"} target="_blank" rel="noreferrer"
                   className="flex-1 flex items-center justify-center border border-black text-black font-bold text-xs px-8 py-3.5 uppercase tracking-[0.2em] hover:bg-black hover:text-white transition-colors text-center"
                 >
                   Follow Us
                 </a>
-                <Link href="/about-us"
+                <Link href={homepageConfig?.about?.linkUrl || "/about-us"}
                   className="flex-1 flex items-center justify-center bg-black text-white font-bold text-xs px-8 py-3.5 uppercase tracking-[0.2em] hover:bg-gray-800 transition-colors text-center"
                 >
                   Our Story
@@ -516,7 +566,7 @@ export default function HomePage() {
           {/* Mobile Overlay Layout */}
           <div className="block md:hidden relative w-full aspect-[4/5] overflow-hidden group shadow-md">
             <img
-              src="https://i.ibb.co/tMybNqQB/aboutsash.jpg"
+              src={homepageConfig?.about?.image || "https://i.ibb.co/tMybNqQB/aboutsash.jpg"}
               alt="Fashion Model"
               className="absolute inset-0 w-full h-full object-cover object-top"
             />
@@ -524,19 +574,19 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
             <div className="absolute bottom-0 inset-x-0 flex flex-col items-center justify-end p-6 text-center">
-              <h2 className="text-2xl uppercase tracking-widest text-white mb-3">
-                <span className="font-light">KNOW</span> <span className="font-black">SASHVOGUE</span>
+              <h2 className="text-2xl uppercase tracking-widest text-white mb-3 whitespace-pre-wrap">
+                {homepageConfig?.about?.title || "KNOW SASHVOGUE"}
               </h2>
-              <p className="text-gray-200 text-[11px] leading-relaxed mb-6 max-w-[95%] mx-auto">
-                Fueled by a deep-rooted passion, SashVOGUE's journey reflects our fearless ambition to redefine modern menswear and womenswear on a global scale.
+              <p className="text-gray-200 text-[11px] leading-relaxed mb-6 max-w-[95%] mx-auto whitespace-pre-wrap">
+                {homepageConfig?.about?.description || "Fueled by a deep-rooted passion, SashVOGUE's journey reflects our fearless ambition to redefine modern menswear and womenswear on a global scale."}
               </p>
               <div className="flex gap-3 w-full">
-                <a href="https://www.instagram.com/sashvogue.in" target="_blank" rel="noreferrer"
+                <a href={homepageConfig?.about?.instagramUrl || "https://www.instagram.com/sashvogue.in"} target="_blank" rel="noreferrer"
                   className="flex-1 flex items-center justify-center border border-white/50 text-white font-bold text-[10px] px-2 py-3.5 uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-colors text-center"
                 >
                   Follow Us
                 </a>
-                <Link href="/about-us"
+                <Link href={homepageConfig?.about?.linkUrl || "/about-us"}
                   className="flex-1 flex items-center justify-center bg-white text-black font-bold text-[10px] px-2 py-3.5 uppercase tracking-[0.2em] hover:bg-gray-200 transition-colors text-center"
                 >
                   Our Story

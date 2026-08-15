@@ -218,7 +218,7 @@ export default function NewCollectionPage() {
         {/* Right: Text and Action */}
         <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-[#111] mb-8 leading-[1.1]" style={{ fontFamily: '"Didot", "Libre Bodoni", "Bodoni Moda", serif' }}>
-            Fill your wardrobe with new collection available for men, women and accessories also.
+            Fill your wardrobe with new collection available for men and women.
           </h1>
           
           <button 
