@@ -613,7 +613,7 @@ export default function CheckoutPage() {
                 )}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <label className="block text-[10px] font-bold text-gray-600">Transaction Ref / UPI Ref ID (12 digits)</label>
+                    <label className="block text-[10px] font-bold text-gray-600">Transaction Ref / UPI Ref ID</label>
                     <button
                       onClick={() => setShowHelp(!showHelp)}
                       className="text-gray-400 hover:text-black transition-colors"
@@ -662,13 +662,13 @@ export default function CheckoutPage() {
             <div className="p-4 border-t border-gray-100 bg-gray-50">
               <button
                 onClick={() => {
-                  if (transactionId.trim().length !== 12) {
-                    setModalError('Transaction ID must be exactly 12 digits.');
+                  if (transactionId.trim().length < 6) {
+                    setModalError('Please enter a valid Transaction ID.');
                     return;
                   }
                   submitOrder();
                 }}
-                disabled={loading || transactionId.trim().length !== 12}
+                disabled={loading || transactionId.trim().length < 6}
                 className="w-full flex items-center justify-center gap-2 bg-black hover:bg-gray-800 text-white font-bold py-2.5 rounded text-xs uppercase tracking-wider disabled:opacity-50 cursor-pointer"
               >
                 {loading ? (

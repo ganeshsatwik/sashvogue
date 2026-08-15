@@ -113,6 +113,29 @@ export default function OrderSuccessPage({ searchParams }: SuccessPageProps) {
                 )}
               </div>
             </div>
+
+            <div className="pt-4 border-t border-gray-100">
+              <p className="font-bold text-gray-800 uppercase text-[10px] tracking-wide mb-2">Items Ordered</p>
+              <div className="space-y-3 max-h-48 overflow-y-auto pr-1">
+                {order.items?.map((item: any, idx: number) => (
+                  <div key={idx} className="flex gap-3 text-xs items-center">
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-gray-800 truncate">{item.name}</p>
+                      <div className="flex flex-col gap-1 mt-0.5">
+                        <p className="text-[10px] text-gray-400">Qty: {item.quantity}</p>
+                        {item.variant && (
+                          <div className="flex gap-1.5 items-center">
+                            {item.variant.size && item.variant.size !== 'N/A' && <span className="text-[9px] font-bold px-1.5 py-0.5 bg-gray-100 border border-gray-200 text-gray-600 rounded">Size: {item.variant.size}</span>}
+                            {item.variant.color && item.variant.color !== 'N/A' && <span className="text-[9px] font-bold px-1.5 py-0.5 bg-gray-100 border border-gray-200 text-gray-600 rounded">Color: {item.variant.color}</span>}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <span className="font-bold text-gray-900">₹{item.price * item.quantity}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="pt-4 border-t border-gray-100 flex gap-2">
